@@ -1,3 +1,5 @@
+from collections import OrderedDict
+
 from django.db import models
 
 # Create your models here.
@@ -16,12 +18,13 @@ from django.db import models
 #float tmp;
 #float hum;
 #uint16_t lux;
+from rest_framework import serializers
+
 
 class LoLaDevice(models.Model):
     FK_User = models.ForeignKey(User)
     EUI = models.TextField(max_length=255)
     Nickname = models.CharField(max_length=255)
-
 
 
 
@@ -32,3 +35,11 @@ class LoLaData(models.Model):
     Ppm = models.FloatField()
     Wtr = models.IntegerField()
     Lux = models.IntegerField()
+    Date = models.DateField(auto_now=True)
+
+
+
+class LoLaRawSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LoLaData
+        fields = ('Temperature', 'Humidity','Ppm', 'Wtr', 'Lux','Date')

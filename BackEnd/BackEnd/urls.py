@@ -10,6 +10,9 @@ urlpatterns = [
     url(r'^analysis', Analysis),
     url(r'^device', Device),
     url(r'^monitoring', Monitoring),
+
+    url(r'^Data/', include('Data.urls')),
+
     url(r'^$', include('Web.urls')),
 
 ]
