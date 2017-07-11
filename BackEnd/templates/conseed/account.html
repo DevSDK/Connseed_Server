@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-
+    {% csrf_token %}
     <meta charset="utf-8">
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -82,6 +82,24 @@
                         <h1>Account Settings</h1>
                         <p>This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will appear/disappear. On small screens, the page content will be pushed off canvas.</p>
                         <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p>
+
+                        <div class="col-md-3">
+                            <div class="login-box well">
+                               <form accept-charset="UTF-8" role="form" method="post" action="">
+                                   {%csrf_token%}
+                                  <legend>Login</legend>
+                                  <div class="form-group">
+                                      <label for="username">Username</label>
+                                      {{ form.id }}
+                                  </div>
+                                      <div class="form-group">
+                                      <label for="password">Password</label>
+                                        {{ form.password }}
+                                  </div>
+                          <div class="form-group">
+                          <input type="submit" class="btn btn-default btn-login-submit btn-block m-t-md" value="Login" />
+                          </div>
+
                     </div>
                 </div>
             </div>
@@ -89,6 +107,7 @@
         <!-- /#page-content-wrapper -->
 
     </div>
+  </div>
     <!-- /#wrapper -->
     <!-- jQuery -->
     <script src="/static/js/jquery.js"></script>

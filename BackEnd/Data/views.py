@@ -3,17 +3,17 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 # Create your views here.
-        #nt wtr;
-        #float ppm;
-        #float tmp;
-        #float hum;
-        #uint16_t lux;
+#nt wtr;
+#float ppm;
+#float tmp;
+#float hum;
+#uint16_t lux;
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view, renderer_classes
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 
-from Data.models import LoLaData, LoLaDevice, LoLaRawSerializer
+from Data.models import LoLaData, LoLaDevice, LoLaRawSerializer, LoLaDeviceSerializer
 
 
 @csrf_exempt
@@ -59,5 +59,23 @@ def GetRawData(request):
 
 def GetStatisticalData(request):
     pass
+
+
+@api_view(['GET'])
+@renderer_classes((JSONRenderer,))
+def GetDeviceList(request):
+
+    try:
+        if request.method == 'POST':
+            return HttpResponse('Invali method', status=400)
+        if not request.user.is_authenticated():
+            return HttpResponse('Not Login', status=401)
+
+        data = LoLaDevice.objects.filter(FK_User=request.user)
+        serializer = LoLaDeviceSerializer(data, many=True)
+        return Response(serializer.data, content_type=u"application/json; charset=utf-8")
+    except Exception as e:
+        HttpResponse(e, status=501)
+
 
 

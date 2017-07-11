@@ -21,9 +21,11 @@ from django.db import models
 from rest_framework import serializers
 
 
+
 class LoLaDevice(models.Model):
     FK_User = models.ForeignKey(User)
     EUI = models.TextField(max_length=255)
+    Battery = models.IntegerField()
     Nickname = models.CharField(max_length=255)
 
 
@@ -35,7 +37,7 @@ class LoLaData(models.Model):
     Ppm = models.FloatField()
     Wtr = models.IntegerField()
     Lux = models.IntegerField()
-    Date = models.DateField(auto_now=True)
+    Date = models.DateTimeField(auto_now=True)
 
 
 
@@ -43,3 +45,8 @@ class LoLaRawSerializer(serializers.ModelSerializer):
     class Meta:
         model = LoLaData
         fields = ('Temperature', 'Humidity','Ppm', 'Wtr', 'Lux','Date')
+
+class LoLaDeviceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LoLaDevice
+        fields = ('id', 'EUI','Battery', 'Nickname')

@@ -18,3 +18,8 @@ GET: /Data/GetRawData
 
 ### Parameter
     device : device pk(id)
+
+GET: /Data/DeviceList
+
+    
+### Require Login (USER) Information.
