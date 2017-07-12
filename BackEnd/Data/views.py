@@ -79,3 +79,6 @@ def GetDeviceList(request):
 
 
 
+
+
+
