@@ -47,8 +47,11 @@ def PostStatisticalData(request):
 def GetRawData(request):
     try:
         if request.method == 'POST':
-            return HttpResponse("Invalid Method")
-        device = request.GET['device']
+            return HttpResponse("Invalid Method", status=400)
+        device = request.GET.get('device')  
+        if device is None:
+            return HttpResponse("require parameter : device id", status=400)
+
         data = LoRaData.objects.filter(FK_Device=device)
 
         serializer = LoRaRawSerializer(data, many=True)
