@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from Data.models import LoLaDevice, LoLaData
+from Data.models import LoRaDevice, LoRaData
 
-admin.site.register(LoLaDevice)
-admin.site.register(LoLaData)
+admin.site.register(LoRaDevice)
+admin.site.register(LoRaData)

@@ -22,16 +22,14 @@ from rest_framework import serializers
 
 
 
-class LoLaDevice(models.Model):
+class LoRaDevice(models.Model):
     FK_User = models.ForeignKey(User)
     EUI = models.TextField(max_length=255)
     Battery = models.IntegerField()
     Nickname = models.CharField(max_length=255)
 
-
-
-class LoLaData(models.Model):
-    FK_Device = models.ForeignKey(LoLaDevice)
+class LoRaData(models.Model):
+    FK_Device = models.ForeignKey(LoRaDevice)
     Temperature = models.FloatField()
     Humidity = models.FloatField()
     Ppm = models.FloatField()
@@ -41,12 +39,12 @@ class LoLaData(models.Model):
 
 
 
-class LoLaRawSerializer(serializers.ModelSerializer):
+class LoRaRawSerializer(serializers.ModelSerializer):
     class Meta:
-        model = LoLaData
+        model = LoRaData
         fields = ('Temperature', 'Humidity','Ppm', 'Wtr', 'Lux','Date')
 
-class LoLaDeviceSerializer(serializers.ModelSerializer):
+class LoRaDeviceSerializer(serializers.ModelSerializer):
     class Meta:
-        model = LoLaDevice
+        model = LoRaDevice
         fields = ('id', 'EUI','Battery', 'Nickname')

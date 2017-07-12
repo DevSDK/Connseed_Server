@@ -13,7 +13,7 @@ from rest_framework.decorators import api_view, renderer_classes
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 
-from Data.models import LoLaData, LoLaDevice, LoLaRawSerializer, LoLaDeviceSerializer
+from Data.models import LoRaData, LoRaDevice, LoRaRawSerializer, LoRaDeviceSerializer
 
 
 @csrf_exempt
@@ -29,11 +29,11 @@ def PostRawData(request):
         Lux = request.POST.get('lux')
         if Device_ID is None or Wtr is None or Ppm is None or Tmp is None or Hum is None or Lux is None:
             return HttpResponse("Less Parameter")
-        Device = LoLaDevice.objects.get(pk = Device_ID)
+        Device = LoRaDevice.objects.get(pk = Device_ID)
         if Device is None:
             return HttpResponse("Invalid Device", status=501)
 
-        query = LoLaData(FK_Device=Device, Temperature=Tmp, Humidity=Hum, Ppm = Ppm, Wtr = Wtr, Lux=Lux)
+        query = LoRaData(FK_Device=Device, Temperature=Tmp, Humidity=Hum, Ppm = Ppm, Wtr = Wtr, Lux=Lux)
         query.save()
         return HttpResponse("OK")
     except Exception as e:
@@ -49,9 +49,9 @@ def GetRawData(request):
         if request.method == 'POST':
             return HttpResponse("Invalid Method")
         device = request.GET['device']
-        data = LoLaData.objects.filter(FK_Device=device)
+        data = LoRaData.objects.filter(FK_Device=device)
 
-        serializer = LoLaRawSerializer(data, many=True)
+        serializer = LoRaRawSerializer(data, many=True)
 
         return Response(serializer.data)
     except Exception as e:
@@ -71,8 +71,8 @@ def GetDeviceList(request):
         if not request.user.is_authenticated():
             return HttpResponse('Not Login', status=401)
 
-        data = LoLaDevice.objects.filter(FK_User=request.user)
-        serializer = LoLaDeviceSerializer(data, many=True)
+        data = LoRaDevice.objects.filter(FK_User=request.user)
+        serializer = LoRaDeviceSerializer(data, many=True)
         return Response(serializer.data, content_type=u"application/json; charset=utf-8")
     except Exception as e:
         HttpResponse(e, status=501)
