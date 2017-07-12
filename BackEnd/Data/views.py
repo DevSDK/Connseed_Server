@@ -48,7 +48,7 @@ def GetRawData(request):
     try:
         if request.method == 'POST':
             return HttpResponse("Invalid Method", status=400)
-        device = request.GET.get('device')  
+        device = request.GET.get('device')
         if device is None:
             return HttpResponse("require parameter : device id", status=400)
 

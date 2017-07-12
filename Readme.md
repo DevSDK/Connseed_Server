@@ -23,3 +23,8 @@ GET: /Data/DeviceList
 
     
 ### Require Login (USER) Information.
+
+#### Response
+    application/json; charset=utf-8
+    'id', 'EUI','Battery', 'Nickname'
+
