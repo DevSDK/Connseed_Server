@@ -5,7 +5,7 @@ from Data.views import GetRawData, PostRawData, GetDeviceList
 
 urlpatterns = [
 
-    url('^GetRawData$', GetRawData),
-    url('^PostRawData$', PostRawData),
-    url('^DeviceList$', GetDeviceList),
+    url('^getrawdata$', GetRawData),
+    url('^postrawdata$', PostRawData),
+    url('^devicelist$', GetDeviceList),
 ]
