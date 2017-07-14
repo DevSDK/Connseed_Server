@@ -2,7 +2,7 @@
 
 
 
-POST: /Data/PostRawData
+POST: /data/postrawdata
 
 ### Parameter    
     
@@ -14,12 +14,12 @@ POST: /Data/PostRawData
     lux    : Lux Value
 
 
-GET: /Data/GetRawData
+GET: /data/getrawdata
 
 ### Parameter
     device : device pk(id)
 
-GET: /Data/DeviceList
+GET: /data/devicelist
 
     
 ### Require Login (USER) Information.
@@ -30,7 +30,7 @@ GET: /Data/DeviceList
 
 
 
-POST: /Login
+POST: /login
 
 ### Parameter
     id : account id
