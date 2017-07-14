@@ -1,3 +1,4 @@
+from django.contrib import auth
 from django.core import serializers
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -82,6 +83,24 @@ def GetDeviceList(request):
 
 
 
+@csrf_exempt
+def PostLogin(request):
+    try:
+        if request.method == 'GET':
+            return HttpResponse("Invalid  GET Method",status=401)
+        if request.method == 'POST':
+            if request.user.is_authenticated():
+                return HttpResponse("IsLogined",status=401)
 
-
-
+            id = request.POST.get("id")
+            pw = request.POST.get('pw')
+            if id is None or pw is None:
+                return HttpResponse("Parameter Denied",status=401)
+            user = auth.authenticate(username=id, password=pw)
+            if user is None:
+                return HttpResponse("Login InValid",status=401)
+            if user.is_active:
+               auth.login(request, user)
+            return HttpResponse('OK')
+    except Exception as e:
+        return HttpResponse(e, status=400)

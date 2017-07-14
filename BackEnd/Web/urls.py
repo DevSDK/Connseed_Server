@@ -6,5 +6,9 @@ from Web.views import *
 
 urlpatterns = [
 
-    url(r'', MainPage),
+    url(r'^account', Account),
+    url(r'^analysis', Analysis),
+    url(r'^device', Device),
+    url(r'^monitoring', Monitoring),
+    url(r'$', MainPage),
 ]
