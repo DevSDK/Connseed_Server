@@ -9,6 +9,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^login$',PostLogin),
     url(r'^data/', include('Data.urls')),
-    url(r'^$', include('Web.urls')),
+    url(r'^', include('Web.urls')),
 
 ]

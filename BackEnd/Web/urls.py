@@ -10,5 +10,5 @@ urlpatterns = [
     url(r'^analysis', Analysis),
     url(r'^device', Device),
     url(r'^monitoring', Monitoring),
-    url(r'$', MainPage),
+    url(r'^$', MainPage),
 ]
