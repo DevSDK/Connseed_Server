@@ -7,6 +7,9 @@ from Web.fomrs import LoginForm
 
 
 def MainPage(request):
+    if not request.user.is_authenticated():
+        return redirect('/account')
+
     return render(request, "connseed/index.html")
 
 def Profile(request):
@@ -30,7 +33,6 @@ def Account(request):
                 auth.login(request,user)
                 return redirect('/')
             return HttpResponse('isLogin')
-
     return render(request, "connseed/account.html", {'form': form})
 
 def Device(request):
