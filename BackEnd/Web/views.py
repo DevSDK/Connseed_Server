@@ -9,11 +9,13 @@ from Web.fomrs import LoginForm
 def MainPage(request):
     return render(request, "connseed/index.html")
 
+def Profile(request):
+    if not request.user.is_authenticated():
+        return redirect('/account')
+    return render(request, "connseed/profile.html")
+
 def Account(request):
     if request.method == 'GET':
-
-        if request.user.is_authenticated():
-            return redirect('/')
         form = LoginForm()
         context = { 'form' : form}
         return render(request, "connseed/account.html", context)
@@ -29,6 +31,7 @@ def Account(request):
                 return redirect('/')
             return HttpResponse('isLogin')
 
+    return render(request, "connseed/account.html", {'form': form})
 
 def Device(request):
     if not request.user.is_authenticated():
