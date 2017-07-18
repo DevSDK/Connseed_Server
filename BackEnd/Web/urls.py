@@ -11,5 +11,6 @@ urlpatterns = [
     url(r'^account', Account),
     url(r'^device', Device),
     url(r'^monitoring', Monitoring),
+    url('^test', TestReq),
     url(r'^$', MainPage),
 ]

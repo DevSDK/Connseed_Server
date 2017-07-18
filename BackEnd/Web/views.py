@@ -55,3 +55,6 @@ def Analysis(request):
 
     return render(request, "connseed/analysis.html")
 
+
+def TestReq(request):
+    return render(request, "connseed/test.html")
