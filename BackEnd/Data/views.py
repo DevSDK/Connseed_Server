@@ -22,6 +22,9 @@ def PostRawData(request):
     try:
         if request.method == 'GET':
             return HttpResponse("Invalid Method")
+        if not request.user.is_authenticated():
+            return HttpResponse("Not Login", status=401)
+
         Device_ID = request.POST.get("device")
         Wtr = request.POST.get("wtr")
         Ppm = request.POST.get('ppm')
