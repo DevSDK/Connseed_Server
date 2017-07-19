@@ -30,9 +30,13 @@ GET: /data/getcurrentdata
 
 
 GET: /data/getdatedata
+
 ### Parameter
     device : device pk(id)
+    date   : %Y-%m-%d
 
+#### Example
+    /data/getdatedata?device=1&date=2017-07-19
 
 GET: /data/devicelist
 
