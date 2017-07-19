@@ -1,3 +1,5 @@
+import datetime
+
 from django.contrib import auth
 from django.core import serializers
 from django.http import HttpResponse
@@ -48,10 +50,12 @@ def PostStatisticalData(request):
     pass
 @api_view(['GET'])
 @renderer_classes((JSONRenderer,))
-def GetRawData(request):
+def GetAllData(request):
     try:
         if request.method == 'POST':
             return HttpResponse("Invalid Method", status=400)
+        if not request.user.is_authenticated():
+            return HttpResponse("Not Login", status=401)
         device = request.GET.get('device')
         if device is None:
             return HttpResponse("require parameter : device id", status=400)
@@ -63,6 +67,58 @@ def GetRawData(request):
         return Response(serializer.data)
     except Exception as e:
         HttpResponse(e, status=501)
+
+
+
+@api_view(['GET'])
+@renderer_classes((JSONRenderer,))
+def GetCurrentData(request):
+    try:
+        if request.method == 'POST':
+            return HttpResponse("Invalid Method", status=400)
+        if not request.user.is_authenticated():
+            return HttpResponse("Not Login", status=401)
+        device = request.GET.get('device')
+        if device is None:
+            return HttpResponse("require parameter : device id", status=400)
+
+        data = LoRaData.objects.filter(FK_Device=device).last()
+
+        serializer = LoRaRawSerializer(data)
+
+        return Response(serializer.data)
+    except Exception as e:
+        HttpResponse(e, status=501)
+
+
+@api_view(['GET'])
+@renderer_classes((JSONRenderer,))
+def GetDateData(request):
+    try:
+        if request.method == 'POST':
+            return HttpResponse("Invalid Method", status=400)
+        if not request.user.is_authenticated():
+            return HttpResponse("Not Login", status=401)
+        device = request.GET.get('device')
+        datestr = request.GET.get('date')
+
+        if device is None:
+            return HttpResponse("require parameter : device id", status=400)
+        if datestr is None:
+            return HttpResponse("require parameter : date", status=400)
+
+        date = datetime.datetime.strptime(datestr, "%Y-%m-%d").date()
+        data = LoRaData.objects.filter(FK_Device=device)
+        endtime = date + datetime.timedelta(days=1) - datetime.timedelta(seconds=20)
+        datedata = data.filter(Date__range=[date.strftime("%Y-%m-%d"),endtime.strftime("%Y-%m-%d")])
+        serializer = LoRaRawSerializer(datedata, many=True)
+        return Response(serializer.data)
+    except Exception as e:
+        return HttpResponse(e, status=501)
+
+
+
+
 
 def GetStatisticalData(request):
     pass

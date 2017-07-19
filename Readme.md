@@ -17,10 +17,22 @@ POST: /data/postrawdata
     lux    : Lux Value
 
 
-GET: /data/getrawdata
+GET: /data/getalldata
 
 ### Parameter
     device : device pk(id)
+
+
+GET: /data/getcurrentdata
+
+### Parameter
+    device : device pk(id)
+
+
+GET: /data/getdatedata
+### Parameter
+    device : device pk(id)
+
 
 GET: /data/devicelist
 
