@@ -30,12 +30,13 @@
             <script>
                 jQuery(document).ready(function ($) {
                     $.ajax({
-                        url: "http://169.56.126.151/data/getrawdata?device=1",
+                        url: "http://169.56.126.151/data/getcurrentdata?device=1",
                         dataType: "json",
                         type: "GET",
                         json: "callback",
                         success: function (r) {
-                            Document.write("Fuck you");
+                            var location = document.getElementById('locationinfo');
+                            location.innerHTML = r.Temperature;
                         }
                     });
                 });

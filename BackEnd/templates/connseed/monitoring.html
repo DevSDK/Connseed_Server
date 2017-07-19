@@ -11,8 +11,6 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-
-
     <title>Connseed - Light&Powerful Smart Farming Solution</title>
 
     <!-- Bootstrap Core CSS -->
@@ -22,6 +20,7 @@
     <link href="/static/css/simple-sidebar.css" rel="stylesheet">
     <link href="/static/css/fb.css" rel="stylesheet">
     <link href="/static/css/devlist.css" rel="stylesheet">
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -114,10 +113,10 @@
                             <li class="rectangle-list">
                                 <a>Device 1</a>
                                 <ul class="hide">
-                                    <li><a href="">TMP : 50ºC</a></li>
-                                    <li><a href="">HUM : 75%</a></li>
-                                    <li><a href="">WTR : 40%</a></li>
-                                    <li><a href="">BRI : 710Lx</a></li>
+                                    <li><a href="" id="TEM1">TEM : unknown</a></li>
+                                    <li><a href="" id="HUM1">HUM : unknown</a></li>
+                                    <li><a href="" id="WTR1">WTR : unknown</a></li>
+                                    <li><a href="" id="BRI1">BRI : unknown</a></li>
                                 </ul>
                             </li>
                             <li class="rectangle-list">
@@ -166,24 +165,24 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="/static/js/bootstrap.min.js"></script>
-
+ 
     <!-- Menu Toggle Script -->
     <script>
-        $("#menu-toggle").click(function (e) {
+        $("#menu-toggle").on('click', function (e) {
             e.preventDefault();
             $("#wrapper").toggleClass("toggled");
         });
     </script>
 
     <script>
-        $("#close").click(function (e) {
+        $("#close").on('click', function (e) {
             e.preventDefault();
             $("#wrapper").toggleClass("toggled");
         });
     </script>
 
     <script>
-        $("#re").click(function (e) {
+        $("#re").on('click', function (e) {
             e.preventDefault();
             $("#wrapper").toggleClass("toggled");
         });
@@ -201,7 +200,26 @@
         });
     </script>
 
-
+    <script>
+	jQuery(document).ready(function ($){
+	    $.ajax({
+		url: "http://169.56.126.151/data/getcurrentdata?device=1",
+		dataType: "json",
+		type: "GET",
+		json: "callback",
+		success: function(r){
+			var tem = document.getElementById('TEM1');
+			var hum = document.getElementById('HUM1');
+			var wtr = document.getElementById('WTR1');
+			var bri = document.getElementById('BRI1');
+			tem.innerHTML = "TEM : " + r.Temperature + "ºC";
+			hum.innerHTML = "HUM : " + r.Humidity + "%";
+			wtr.innerHTML = "WTR : " + r.Wtr;
+			bri.innerHTML = "BRI : " + r.Lux + "Lx";
+		}
+	    });
+        });	
+    </script>
 </body>
 
 </html>
