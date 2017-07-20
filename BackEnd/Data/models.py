@@ -37,12 +37,54 @@ class LoRaData(models.Model):
     Lux = models.IntegerField()
     Date = models.DateTimeField(auto_now=True)
 
+class LoRaStatisticalData_Day(models.Model):
+    FK_Device = models.ForeignKey(LoRaDevice)
+    Temperature = models.FloatField()
+    Humidity = models.FloatField()
+    Ppm = models.FloatField()
+    Wtr = models.IntegerField()
+    Lux = models.IntegerField()
+    Date = models.DateTimeField(auto_now=True)
 
+class LoRaStatisticalData_Week(models.Model):
+    FK_Device = models.ForeignKey(LoRaDevice)
+    Temperature = models.FloatField()
+    Humidity = models.FloatField()
+    Ppm = models.FloatField()
+    Wtr = models.IntegerField()
+    Lux = models.IntegerField()
+    Date = models.DateTimeField(auto_now=True)
+
+class LoRaStatisticalData_Month(models.Model):
+    FK_Device = models.ForeignKey(LoRaDevice)
+    Temperature = models.FloatField()
+    Humidity = models.FloatField()
+    Ppm = models.FloatField()
+    Wtr = models.IntegerField()
+    Lux = models.IntegerField()
+    Date = models.DateTimeField(auto_now=True)
 
 class LoRaRawSerializer(serializers.ModelSerializer):
     class Meta:
         model = LoRaData
         fields = ('Temperature', 'Humidity','Ppm', 'Wtr', 'Lux','Date')
+
+
+class LoRaDaySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LoRaStatisticalData_Day
+        fields = ('Temperature', 'Humidity','Ppm', 'Wtr', 'Lux','Date')
+
+class LoRaWeekSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LoRaStatisticalData_Week
+        fields = ('Temperature', 'Humidity','Ppm', 'Wtr', 'Lux','Date')
+
+class LoRaMonthSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LoRaStatisticalData_Month
+        fields = ('Temperature', 'Humidity','Ppm', 'Wtr', 'Lux','Date')
+
 
 class LoRaDeviceSerializer(serializers.ModelSerializer):
     class Meta:

@@ -16,7 +16,8 @@ from rest_framework.decorators import api_view, renderer_classes
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 
-from Data.models import LoRaData, LoRaDevice, LoRaRawSerializer, LoRaDeviceSerializer
+from Data.models import LoRaData, LoRaDevice, LoRaRawSerializer, LoRaDeviceSerializer, LoRaStatisticalData_Day, \
+    LoRaStatisticalData_Week, LoRaStatisticalData_Month, LoRaDaySerializer, LoRaWeekSerializer, LoRaMonthSerializer
 
 
 @csrf_exempt
@@ -120,14 +121,10 @@ def GetDateData(request):
 
 
 
-def GetStatisticalData(request):
-    pass
-
 
 @api_view(['GET'])
 @renderer_classes((JSONRenderer,))
 def GetDeviceList(request):
-
     try:
         if request.method == 'POST':
             return HttpResponse('Invali method', status=400)
@@ -163,3 +160,74 @@ def PostLogin(request):
             return HttpResponse('OK')
     except Exception as e:
         return HttpResponse(e, status=400)
+
+@api_view(['GET'])
+@renderer_classes((JSONRenderer,))
+def GetStatisticalDay(request):
+    try:
+        if request.method == 'POST':
+            return HttpResponse("Invalid Method", status=400)
+        if not request.user.is_authenticated():
+            return HttpResponse("Not Login", status=401)
+        device = request.GET.get('device')
+        datestr = request.GET.get('date')
+        if device is None:
+            return HttpResponse("require parameter : device id", status=400)
+        if datestr is None:
+            return HttpResponse("require parameter : date", status=400)
+        date = datetime.datetime.strptime(datestr, "%Y-%m-%d").date()
+        data = LoRaStatisticalData_Day.objects.filter(FK_Device=device)
+        datedata = data.filter(Date__year=date.year, Date__month=date.month, Date__day= date.day)[0]
+        serializer = LoRaDaySerializer(datedata)
+        return Response(serializer.data)
+    except Exception as e:
+        return HttpResponse(e, status=501)
+
+@api_view(['GET'])
+@renderer_classes((JSONRenderer,))
+def GetStatisticalWeek(request):
+    try:
+        if request.method == 'POST':
+            return HttpResponse("Invalid Method", status=400)
+        if not request.user.is_authenticated():
+            return HttpResponse("Not Login", status=401)
+        device = request.GET.get('device')
+        datestr = request.GET.get('date')
+        if device is None:
+            return HttpResponse("require parameter : device id", status=400)
+        if datestr is None:
+            return HttpResponse("require parameter : date", status=400)
+        date = datetime.datetime.strptime(datestr, "%Y-%m-%d").date()
+        data = LoRaStatisticalData_Week.objects.filter(FK_Device=device)
+        datedata = data.filter(Date__year=date.year, Date__month=date.month, Date__day=date.day)[0]
+        serializer = LoRaWeekSerializer(datedata)
+        return Response(serializer.data)
+    except Exception as e:
+        return HttpResponse(e, status=501)
+
+
+@api_view(['GET'])
+@renderer_classes((JSONRenderer,))
+def GetStatisticalMonth(request):
+    try:
+        if request.method == 'POST':
+            return HttpResponse("Invalid Method", status=400)
+        if not request.user.is_authenticated():
+            return HttpResponse("Not Login", status=401)
+        device = request.GET.get('device')
+        datestr = request.GET.get('date')
+
+        if device is None:
+            return HttpResponse("require parameter : device id", status=400)
+        if datestr is None:
+            return HttpResponse("require parameter : date", status=400)
+
+        date = datetime.datetime.strptime(datestr, "%Y-%m-%d").date()
+        data = LoRaStatisticalData_Month.objects.filter(FK_Device=device)
+        datedata = data.filter(Date__year=date.year, Date__month=date.month)[0]
+        serializer = LoRaMonthSerializer(datedata)
+        return Response(serializer.data)
+    except Exception as e:
+        return HttpResponse(e, status=501)
+
+
