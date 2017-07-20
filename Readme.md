@@ -63,3 +63,36 @@ POST: /login
     Login InValid       : status 401
     anyexception        : status 400
 
+
+GET: /data/getstatisticaldata_day
+
+### Parameter
+    device : device pk(id)
+    date   : %Y-%m-%d
+
+
+GET: /data/getstatisticaldata_week
+
+### Parameter
+    device : device pk(id)
+    date   : %Y-%m-%d
+
+
+GET: /data/getstatisticaldata_month
+
+### Parameter
+    device : device pk(id)
+    date   : %Y-%m-%d
+
+
+
+#### Response 
+    OK                  : status 200
+    Invalid  GET Method : status 401
+    IsLogined           : status 401
+    Parameter Denied    : status 401
+    Login InValid       : status 401
+    anyexception        : status 400
+
+
+
