@@ -177,8 +177,17 @@ def GetStatisticalDay(request):
             return HttpResponse("require parameter : date", status=400)
         date = datetime.datetime.strptime(datestr, "%Y-%m-%d").date()
         data = LoRaStatisticalData_Day.objects.filter(FK_Device=device)
-        datedata = data.filter(Date__year=date.year, Date__month=date.month, Date__day= date.day)[0]
-        serializer = LoRaDaySerializer(datedata)
+
+
+        result = []
+        for i in range(5):
+            datedata = data.filter(Date__year=date.year, Date__month=date.month, Date__day=date.day).first()
+            if datedata is None:
+                break
+            result.insert(0,datedata)
+            date -= datetime.timedelta(days=1)
+
+        serializer = LoRaDaySerializer(result,many=True)
         return Response(serializer.data)
     except Exception as e:
         return HttpResponse(e, status=501)
