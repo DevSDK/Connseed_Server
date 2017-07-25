@@ -113,42 +113,37 @@
                             <li class="rectangle-list">
                                 <a>Device 1</a>
                                 <ul class="hide">
-                                    <li><a href="" id="TEM1">TEM : unknown</a></li>
-                                    <li><a href="" id="HUM1">HUM : unknown</a></li>
-                                    <li><a href="" id="WTR1">WTR : unknown</a></li>
-                                    <li><a href="" id="BRI1">BRI : unknown</a></li>
+                                    <li><a href="" id="TEM1">온도 : Loding</a></li>
+                                    <li><a href="" id="HUM1">습도 : Loding</a></li>
+                                    <li><a href="" id="WTR1">수분량 : Loding</a></li>
+                                    <li><a href="" id="BRI1">광량 : Loding</a></li>
                                 </ul>
                             </li>
                             <li class="rectangle-list">
                                 <a>Device 2</a>
                                 <ul class="hide">
-                                    <li><a href="">TMP : 23ºC</a></li>
-                                    <li><a href="">HUM : 70%</a></li>
-                                    <li><a href="">WTR : 20%</a></li>
-                                    <li><a href="">BRI : 700Lx</a></li>
+                                    <li><a href="">온도 : 23ºC</a></li>
+                                    <li><a href="">습도 : 70%</a></li>
+                                    <li><a href="">수분량 : 20%</a></li>
+                                    <li><a href="">광량 : 700Lx</a></li>
                                 </ul>
                             </li>
                             <li class="rectangle-list">
                                 <a>Device 3</a>
                                 <ul class="hide">
-                                    <li><a href="">TMP : 41ºC</a></li>
-                                    <li><a href="">
-                                            <svg width="500" height="500" style="background-color:rgba(50, 50, 30, 0)"></svg>
-                                            <script src="/static/js/d3.min.js"></script>
-                                            <script type="text/javascript" src="/static/monitor.js"></script>
-                                            HUM : 71%<br />
-                                        </a></li>
-                                    <li><a href="">WTR : 60%</a></li>
-                                    <li><a href="">BRI : 540Lx</a></li>
+                                    <li><a href="">온도 : 41ºC</a></li>
+                                    <li><a href="">습도 : 71%</a></li>
+                                    <li><a href="">수분량 : 60%</a></li>
+                                    <li><a href="">광량 : 540Lx</a></li>
                                 </ul>
                             </li>
                             <li class="rectangle-list">
                                 <a>Device 4</a>
                                 <ul class="hide">
-                                    <li><a href="">TMP : 29ºC</a></li>
-                                    <li><a href="">HUM : 56%</a></li>
-                                    <li><a href="">WTR : 58%</a></li>
-                                    <li><a href="">BRI : 220Lx</a></li>
+                                    <li><a href="">온도 : 29ºC</a></li>
+                                    <li><a href="">습도 : 56%</a></li>
+                                    <li><a href="">수분량 : 58%</a></li>
+                                    <li><a href="">광량 : 220Lx</a></li>
                                 </ul>
                             </li>
                         </ol>
@@ -201,24 +196,34 @@
     </script>
 
     <script>
-	jQuery(document).ready(function ($){
-	    $.ajax({
-		url: "http://169.56.126.151/data/getcurrentdata?device=1",
-		dataType: "json",
-		type: "GET",
-		json: "callback",
-		success: function(r){
-			var tem = document.getElementById('TEM1');
-			var hum = document.getElementById('HUM1');
-			var wtr = document.getElementById('WTR1');
-			var bri = document.getElementById('BRI1');
-			tem.innerHTML = "TEM : " + r.Temperature + "ºC";
-			hum.innerHTML = "HUM : " + r.Humidity + "%";
-			wtr.innerHTML = "WTR : " + r.Wtr;
-			bri.innerHTML = "BRI : " + r.Lux + "Lx";
-		}
-	    });
-        });	
+        jQuery(document).ready(function ($){
+            $.ajax({
+                url: "http://169.56.126.151/data/getcurrentdata?device=1",
+                dataType: "json",
+                type: "GET",
+                json: "callback",
+                success: function(r){
+                    var tem = document.getElementById('TEM1');
+                    var hum = document.getElementById('HUM1');
+                    var wtr = document.getElementById('WTR1');
+                    var bri = document.getElementById('BRI1');
+                    tem.innerHTML = "온도 : " + r.Temperature + "ºC";
+                    hum.innerHTML = "습도 : " + r.Humidity + "%";
+                    wtr.innerHTML = "수분량 : " + r.Wtr;
+                    bri.innerHTML = "광량 : " + r.Lux + "Lx";
+                },
+                error: function(request, status, error){
+                    var tem = document.getElementById('TEM1');
+                    var hum = document.getElementById('HUM1');
+                    var wtr = document.getElementById('WTR1');
+                    var bri = document.getElementById('BRI1');
+                    tem.innerHTML = "온도 : ERROR";
+                    hum.innerHTML = "습도 : ERROR";
+                    wtr.innerHTML = "수분량 : ERROR";
+                    bri.innerHTML = "광량 : ERROR";
+                }
+            });
+         });
     </script>
 </body>
 

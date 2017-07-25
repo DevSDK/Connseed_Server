@@ -13,12 +13,13 @@
     <!-- Custom CSS -->
     <link href="/static/css/simple-sidebar.css" rel="stylesheet">
     <link href="/static/css/fb.css" rel="stylesheet">
-
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
     <![endif]-->
 
     <style>
@@ -84,9 +85,7 @@
                         <p style="color:white">Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p>
 
 
-                        <svg width="960" height="1000"  style="background-color:rgba(50, 50, 30, 0.5)"></svg>
-                        <script src="/static/js/d3.min.js"></script>
-                        <script type="text/javascript" src="/static/histo_script.js"></script>
+                        <div id="graph"></div>
 
                         <a href="#" class="float">
                             <i class="fl"></i>
@@ -105,22 +104,106 @@
     <script src="/static/js/bootstrap.min.js"></script>
     <!-- Menu Toggle Script -->
     <script>
-        $("#menu-toggle").click(function (e) {
+        $("#menu-toggle").on('click', function (e) {
             e.preventDefault();
             $("#wrapper").toggleClass("toggled");
         });
     </script>
     <script>
-        $("#close").click(function (e) {
+        $("#close").on('click', function (e) {
             e.preventDefault();
             $("#wrapper").toggleClass("toggled");
         });
     </script>
     <script>
-        $("#re").click(function (e) {
+        $("#re").on('click', function (e) {
             e.preventDefault();
             $("#wrapper").toggleClass("toggled");
         });
+    </script>
+    <script>
+        var date = new Date();
+        var errorflag = 0;
+        var TEMarray = [0, 0, 0, 0, 0];
+        var HUMarray = [0, 0, 0, 0, 0];
+        var WTRarray = [0, 0, 0, 0, 0];
+        var LUXarray = [0, 0, 0, 0, 0];
+        jQuery(document).ready(function ($) {
+            $.ajax({
+                url: "http://169.56.126.151/data/getstatisticaldata_day?device=1&date=2017-07-09",
+                dataType: "json",
+                type: "GET",
+                json: "callback",
+                success: function (r) {
+                    for(i=0; i<r.length; i++){
+                        TEMarray[i] = r[i].Temperature;
+                        HUMarray[i] = r[i].Humidity;
+                        WTRarray[i] = r[i].Wtr;
+                        LUXarray[i] = r[i].Lux;
+                    }
+                },
+                error: function(request, status, error){
+                    if(errorflag == 0){
+                        alert("네트워크가 좋지 않습니다.\n네트워크 연결을 확인해주세요.");
+                        errorflag = 1;
+                     }
+                }
+             });
+         });
+
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawVisualization);
+        function drawVisualization() {
+        // Some raw data (not necessarily accurate)
+        var data = google.visualization.arrayToDataTable([
+            ['날짜', '온도', '습도', '수분량', '광량'],
+            ['2017/07/05',  TEMarray[4], HUMarray[4], WTRarray[4], LUXarray[4]],
+            ['2017/07/06',  TEMarray[3], HUMarray[3], WTRarray[3], LUXarray[3]],
+            ['2017/07/07',  TEMarray[2], HUMarray[2], WTRarray[2], LUXarray[2]],
+            ['2017/07/08',  TEMarray[1], HUMarray[1], WTRarray[1], LUXarray[1]],
+            ['2017/07/09',  TEMarray[0], HUMarray[0], WTRarray[0], LUXarray[0]]
+        ]);
+
+         var options = {
+             annotations: {
+                textStyle: {
+                    color: "#FFFFFF"
+                }
+             },
+             titleTextStyle: {
+                color: "#FFFFFF"
+             },
+             legendTextStyle: {color:'#FFFFFF'},
+             vAxis: {
+                textStyle: {color: "#FFFFFF"},
+                titleTextStyle: {
+                    color: "#FFFFFF"
+                },
+                gridlines: {
+                    color: "#FFFFFF"
+                },
+                baselineColor: "#FFFFFF"
+             },
+             hAxis: {
+                textStyle: {color: "#FFFFFF"},
+                gridlines: {
+                    color: "#FFFFFF"
+                }
+             },
+             backgroundColor: {
+                'fill': '#32321e',
+                'fillOpacity': 0.85
+             },
+             titleTextStyle: {
+                color: "#FFFFFF"
+             },
+             seriesType: 'bars',
+             series: {4: {type: 'line', color: '#FFFFFF'}}
+         };
+
+         var chart = new google.visualization.ComboChart(document.getElementById('graph'));
+         chart.draw(data, options);
+    }
     </script>
 </body>
 </html>
