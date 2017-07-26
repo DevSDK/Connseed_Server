@@ -31,6 +31,7 @@
             fill: #000;
             font: 10px sans-serif;
         }
+
         body {
             height: 100%;
             margin: 0;
@@ -40,6 +41,85 @@
             width: 100%;
             background: url(/static/bg.png) repeat center center fixed;
             background-size: cover;
+        }
+
+         label.tmp {
+            margin-left: 2%;
+            font-size: 30px;
+        }
+
+        label.hum {
+            margin-left: 2%;
+            font-size: 30px;
+        }
+
+        label.wtr {
+            margin-left: 2%;
+            font-size: 30px;
+        }
+
+        label.lux {
+            margin-left: 2%;
+            font-size: 30px;
+        }
+
+        label.ppm {
+            margin-left: 2%;
+            font-size: 30px;
+        }
+
+
+        input#select1:checked + label.tmp {
+            background: red;
+            color: white;
+        }
+
+        input#select2:checked + label.hum {
+            background: red;
+            color: white;
+        }
+
+        input#select3:checked + label.wtr {
+            background: red;
+            color: white;
+        }
+
+        input#select4:checked + label.lux {
+            background: red;
+            color: white;
+        }
+
+        input#select5:checked + label.ppm {
+            background: red;
+            color: white;
+        }
+
+        input#select1, input#select2, input#select3, input#select4, input#select5 {
+            display: none;
+        }
+
+        .page1, .page2, .page3, .page4, .page5 {
+            display: none;
+        }
+
+        input#select1:checked ~ .page1 {
+            display: block;
+        }
+
+        input#select2:checked ~ .page2 {
+            display: block;
+        }
+
+        input#select3:checked ~ .page3 {
+            display: block;
+        }
+
+        input#select4:checked ~ .page4 {
+            display: block;
+        }
+
+        input#select5:checked ~ .page5 {
+            display: block;
         }
     </style>
 </head>
@@ -84,9 +164,24 @@
                         <p style="font-size:20px; color:white">This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will appear/disappear. On small screens, the page content will be pushed off canvas.</pstyle="font-size:30px;>
                         <p style="color:white">Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p>
 
+                         <div style="background-color:rgba(50, 50, 30, 0.5)">
+                            <input id="select1" name="con" type="radio" checked>
+                            <label for="select1" class="tmp">Tmp</label>
+                            <input id="select2" name="con" type="radio">
+                            <label for="select2" class="hum">Hum</label>
+                            <input id="select3" name="con" type="radio">
+                            <label for="select3" class="wtr">Wtr</label>
+                            <input id="select4" name="con" type="radio">
+                            <label for="select4" class="lux">Lux</label>
+                            <input id="select5" name="con" type="radio">
+                            <label for="select5" class="ppm">PPM</label><br />
 
-                        <div id="graph"></div>
-
+                            <div id="graph1" class="page1" onclick="chartresize"></div>
+                            <div id="graph2" class="page2" onclick="chartresize"></div>
+                            <div id="graph3" class="page3" onclick="chartresize"></div>
+                            <div id="graph4" class="page4" onclick="chartresize"></div>
+                            <div id="graph5" class="page5" onclick="chartresize"></div>
+                         </div>
                         <a href="#" class="float">
                             <i class="fl"></i>
                         </a>
@@ -122,12 +217,19 @@
         });
     </script>
     <script>
+        function chartresize(){
+            drawVisualization();
+        }
+    </script>
+    <script>
         var date = new Date();
         var errorflag = 0;
         var TEMarray = [0, 0, 0, 0, 0];
         var HUMarray = [0, 0, 0, 0, 0];
         var WTRarray = [0, 0, 0, 0, 0];
         var LUXarray = [0, 0, 0, 0, 0];
+        var PPMarray = [0, 0, 0, 0, 0];
+
         jQuery(document).ready(function ($) {
             $.ajax({
                 url: "http://169.56.126.151/data/getstatisticaldata_day?device=1&date=2017-07-09",
@@ -140,6 +242,7 @@
                         HUMarray[i] = r[i].Humidity;
                         WTRarray[i] = r[i].Wtr;
                         LUXarray[i] = r[i].Lux;
+                        PPMarray[i] = r[i].Ppm;
                     }
                 },
                 error: function(request, status, error){
@@ -155,16 +258,55 @@
         google.charts.setOnLoadCallback(drawVisualization);
         function drawVisualization() {
         // Some raw data (not necessarily accurate)
-        var data = google.visualization.arrayToDataTable([
-            ['날짜', '온도', '습도', '수분량', '광량'],
-            ['2017/07/05',  TEMarray[4], HUMarray[4], WTRarray[4], LUXarray[4]],
-            ['2017/07/06',  TEMarray[3], HUMarray[3], WTRarray[3], LUXarray[3]],
-            ['2017/07/07',  TEMarray[2], HUMarray[2], WTRarray[2], LUXarray[2]],
-            ['2017/07/08',  TEMarray[1], HUMarray[1], WTRarray[1], LUXarray[1]],
-            ['2017/07/09',  TEMarray[0], HUMarray[0], WTRarray[0], LUXarray[0]]
+        var data1 = google.visualization.arrayToDataTable([
+            ['날짜', '온도'],
+            ['2017/07/05',  TEMarray[4]],
+            ['2017/07/06',  TEMarray[3]],
+            ['2017/07/07',  TEMarray[2]],
+            ['2017/07/08',  TEMarray[1]],
+            ['2017/07/09',  TEMarray[0]]
         ]);
 
-         var options = {
+        var data2 = google.visualization.arrayToDataTable([
+            ['날짜', '습도'],
+            ['2017/07/05', HUMarray[4]],
+            ['2017/07/06', HUMarray[3]],
+            ['2017/07/07', HUMarray[2]],
+            ['2017/07/08', HUMarray[1]],
+            ['2017/07/09', HUMarray[0]]
+        ]);
+
+        var data3 = google.visualization.arrayToDataTable([
+            ['날짜', '수분량'],
+            ['2017/07/05', WTRarray[4]],
+            ['2017/07/06', WTRarray[3]],
+            ['2017/07/07', WTRarray[2]],
+            ['2017/07/08', WTRarray[1]],
+            ['2017/07/09', WTRarray[0]]
+        ]);
+
+        var data4 = google.visualization.arrayToDataTable([
+            ['날짜', '광량'],
+            ['2017/07/05', LUXarray[4]],
+            ['2017/07/06', LUXarray[3]],
+            ['2017/07/07', LUXarray[2]],
+            ['2017/07/08', LUXarray[1]],
+            ['2017/07/09', LUXarray[0]]
+        ]);
+
+        var data5 = google.visualization.arrayToDataTable([
+            ['날짜', '유해물질 농도'],
+            ['2017/07/05', PPMarray[4]],
+            ['2017/07/06', PPMarray[3]],
+            ['2017/07/07', PPMarray[2]],
+            ['2017/07/08', PPMarray[1]],
+            ['2017/07/09', PPMarray[0]]
+        ]);
+
+         var option1 = {
+            width: $(window).width()-70,
+            height: 450,
+            colors: ['#3366cc'],
              annotations: {
                 textStyle: {
                     color: "#FFFFFF"
@@ -191,8 +333,7 @@
                 }
              },
              backgroundColor: {
-                'fill': '#32321e',
-                'fillOpacity': 0.85
+                'fillOpacity': 0
              },
              titleTextStyle: {
                 color: "#FFFFFF"
@@ -201,9 +342,177 @@
              series: {4: {type: 'line', color: '#FFFFFF'}}
          };
 
-         var chart = new google.visualization.ComboChart(document.getElementById('graph'));
-         chart.draw(data, options);
+         var option2 = {
+            width: $(window).width()-70,
+            height: 450,
+            colors: ['#dc3912'],
+             annotations: {
+                textStyle: {
+                    color: "#FFFFFF"
+                }
+             },
+             titleTextStyle: {
+                color: "#FFFFFF"
+             },
+             legendTextStyle: {color:'#FFFFFF'},
+             vAxis: {
+                textStyle: {color: "#FFFFFF"},
+                titleTextStyle: {
+                    color: "#FFFFFF"
+                },
+                gridlines: {
+                    color: "#FFFFFF"
+                },
+                baselineColor: "#FFFFFF"
+             },
+             hAxis: {
+                textStyle: {color: "#FFFFFF"},
+                gridlines: {
+                    color: "#FFFFFF"
+                }
+             },
+             backgroundColor: {
+                'fillOpacity': 0
+             },
+             titleTextStyle: {
+                color: "#FFFFFF"
+             },
+             seriesType: 'bars',
+             series: {4: {type: 'line', color: '#FFFFFF'}}
+         };
+
+         var option3 = {
+            width: $(window).width()-70,
+            height: 450,
+            colors: ['#109618'],
+             annotations: {
+                textStyle: {
+                    color: "#FFFFFF"
+                }
+             },
+             titleTextStyle: {
+                color: "#FFFFFF"
+             },
+             legendTextStyle: {color:'#FFFFFF'},
+             vAxis: {
+                textStyle: {color: "#FFFFFF"},
+                titleTextStyle: {
+                    color: "#FFFFFF"
+                },
+                gridlines: {
+                    color: "#FFFFFF"
+                },
+                baselineColor: "#FFFFFF"
+             },
+             hAxis: {
+                textStyle: {color: "#FFFFFF"},
+                gridlines: {
+                    color: "#FFFFFF"
+                }
+             },
+             backgroundColor: {
+                'fillOpacity': 0
+             },
+             titleTextStyle: {
+                color: "#FFFFFF"
+             },
+             seriesType: 'bars',
+             series: {4: {type: 'line', color: '#FFFFFF'}}
+         };
+
+         var option4 = {
+            width: $(window).width()-70,
+            height: 450,
+            colors: ['#ff9900'],
+             annotations: {
+                textStyle: {
+                    color: "#FFFFFF"
+                }
+             },
+             titleTextStyle: {
+                color: "#FFFFFF"
+             },
+             legendTextStyle: {color:'#FFFFFF'},
+             vAxis: {
+                textStyle: {color: "#FFFFFF"},
+                titleTextStyle: {
+                    color: "#FFFFFF"
+                },
+                gridlines: {
+                    color: "#FFFFFF"
+                },
+                baselineColor: "#FFFFFF"
+             },
+             hAxis: {
+                textStyle: {color: "#FFFFFF"},
+                gridlines: {
+                    color: "#FFFFFF"
+                }
+             },
+             backgroundColor: {
+                'fillOpacity': 0
+             },
+             titleTextStyle: {
+                color: "#FFFFFF"
+             },
+             seriesType: 'bars',
+             series: {4: {type: 'line', color: '#FFFFFF'}}
+         };
+
+        var option5 = {
+            width: $(window).width()-80,
+            height: 450,
+            colors: ['#707070'],
+             annotations: {
+                textStyle: {
+                    color: "#FFFFFF"
+                }
+             },
+             titleTextStyle: {
+                color: "#FFFFFF"
+             },
+             legendTextStyle: {color:'#FFFFFF'},
+             vAxis: {
+                textStyle: {color: "#FFFFFF"},
+                titleTextStyle: {
+                    color: "#FFFFFF"
+                },
+                gridlines: {
+                    color: "#FFFFFF"
+                },
+                baselineColor: "#FFFFFF"
+             },
+             hAxis: {
+                textStyle: {color: "#FFFFFF"},
+                gridlines: {
+                    color: "#FFFFFF"
+                }
+             },
+             backgroundColor: {
+                'fillOpacity': 0
+             },
+             titleTextStyle: {
+                color: "#FFFFFF"
+             },
+             seriesType: 'bars',
+             series: {4: {type: 'line', color: '#FFFFFF'}}
+         };
+
+         var chart1 = new google.visualization.ComboChart(document.getElementById('graph1'));
+         var chart2 = new google.visualization.ComboChart(document.getElementById('graph2'));
+         var chart3 = new google.visualization.ComboChart(document.getElementById('graph3'));
+         var chart4 = new google.visualization.ComboChart(document.getElementById('graph4'));
+         var chart5 = new google.visualization.ComboChart(document.getElementById('graph5'));
+         chart1.draw(data1, option1);
+         chart2.draw(data2, option2);
+         chart3.draw(data3, option3);
+         chart4.draw(data4, option4);
+         chart5.draw(data5, option5);
     }
+
+    $(window).resize(function(){
+        drawVisualization();
+    });
     </script>
 </body>
 </html>
