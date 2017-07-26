@@ -13,7 +13,7 @@ from django.db import models
 #ppm(공기오염)
 #wtr(토양수분)
 
-#nt wtr;
+#int wtr;
 #float ppm;
 #float tmp;
 #float hum;
