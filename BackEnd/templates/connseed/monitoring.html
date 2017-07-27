@@ -66,6 +66,15 @@
             background-size: cover;
         }
     </style>
+
+    <style>
+        .devcard {
+            background:rgba(25, 25, 20, 0.7);
+            width:1300px;
+            height:400px;
+            margin:20px;
+        }
+    </style>
 </head>
 
 <body>
@@ -109,48 +118,70 @@
                         <h1 style="color:white; font-size:50px">Monitoring</h1>
                         <p style="color:white; font-size:20px">This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will appear/disappear. On small screens, the page content will be pushed off canvas.</p>
                         <p style="color:white">Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p>
-                        <ol>
-                            <li class="rectangle-list">
-                                <a>Device 1</a>
-                                <ul class="hide">
-                                    <li><a href="" id="TEM1">온도 : Loding</a></li>
-                                    <li><a href="" id="HUM1">습도 : Loding</a></li>
-                                    <li><a href="" id="WTR1">수분량 : Loding</a></li>
-                                    <li><a href="" id="BRI1">광량 : Loding</a></li>
-                                </ul>
-                            </li>
-                            <li class="rectangle-list">
-                                <a>Device 2</a>
-                                <ul class="hide">
-                                    <li><a href="">온도 : 23ºC</a></li>
-                                    <li><a href="">습도 : 70%</a></li>
-                                    <li><a href="">수분량 : 20%</a></li>
-                                    <li><a href="">광량 : 700Lx</a></li>
-                                </ul>
-                            </li>
-                            <li class="rectangle-list">
-                                <a>Device 3</a>
-                                <ul class="hide">
-                                    <li><a href="">온도 : 41ºC</a></li>
-                                    <li><a href="">습도 : 71%</a></li>
-                                    <li><a href="">수분량 : 60%</a></li>
-                                    <li><a href="">광량 : 540Lx</a></li>
-                                </ul>
-                            </li>
-                            <li class="rectangle-list">
-                                <a>Device 4</a>
-                                <ul class="hide">
-                                    <li><a href="">온도 : 29ºC</a></li>
-                                    <li><a href="">습도 : 56%</a></li>
-                                    <li><a href="">수분량 : 58%</a></li>
-                                    <li><a href="">광량 : 220Lx</a></li>
-                                </ul>
-                            </li>
-                        </ol>
+                        <div class="devcard">
+                            <img src="static/dev_y.png" width=100 height=300 style="margin:50px 70px; float:left" />
+
+                            <div style="width:80%; height:85%; float:left; margin-top:30px; border-left:5px solid white">
+                                <h1 style="color:white; margin-left:5%">Device 1 (Nickname : 학교뒷산)</h1>
+
+                                <h2 id="TEM1" style="color:white; margin-left:5%">기온 : LOADING</h2>
+                                <h2 id="HUM1" style="color:white; margin-left:5%">습도 : LOADING</h2>
+                                <h2 id="WTR1" style="color:white; margin-left:5%">수분 : LOADING</h2>
+                                <h2 id="BRI1" style="color:white; margin-left:5%">광량 : LOADING</h2>
+                                <h2 id="PPM1" style="color:white; margin-left:5%">유해 물질 : LOADING</h2>
+                            </div>
+                        </div>
+
+                        <div class="devcard">
+                            <img src="static/dev_w.png" width=100 height=300 style="margin:50px 70px; float:left" />
+
+                            <div style="width:80%; height:85%; float:left; margin-top:30px; border-left:5px solid white">
+                                <h1 style="color:white; margin-left:5%">Device 2 (Nickname : 학교화단)</h1>
+
+                                <h2 id="TEM2" style="color:white; margin-left:5%">기온 : LOADING</h2>
+                                <h2 id="HUM2" style="color:white; margin-left:5%">습도 : LOADING</h2>
+                                <h2 id="WTR2" style="color:white; margin-left:5%">수분 : LOADING</h2>
+                                <h2 id="BRI2" style="color:white; margin-left:5%">광량 : LOADING</h2>
+                                <h2 id="PPM2" style="color:white; margin-left:5%">유해 물질 : LOADING</h2>
+                            </div>
+
+                        </div>
+
+                        <div class="devcard">
+                            <img src="static/dev_b.png" width=100 height=300 style="margin:50px 70px; float:left" />
+
+                            <div style="width:80%; height:85%; float:left; margin-top:30px; border-left:5px solid white">
+                                <h1 style="color:white; margin-left:5%">Device 3 (Nickname : 학교텃밭)</h1>
+
+                                <h2 id="TEM3" style="color:white; margin-left:5%">기온 : LOADING</h2>
+                                <h2 id="HUM3" style="color:white; margin-left:5%">습도 : LOADING</h2>
+                                <h2 id="WTR3" style="color:white; margin-left:5%">수분 : LOADING</h2>
+                                <h2 id="BRI3" style="color:white; margin-left:5%">광량 : LOADING</h2>
+                                <h2 id="PPM3" style="color:white; margin-left:5%">유해 물질 : LOADING</h2>
+                            </div>
+
+                        </div>
+
+                        <div class="devcard">
+                            <img src="static/dev_c.png" width=100 height=300 style="margin:50px 70px; float:left" />
+
+                            <div style="width:80%; height:85%; float:left; margin-top:30px; border-left:5px solid white">
+                                <h1 style="color:white; margin-left:5%">Device 4 (Nickname : 운동장)</h1>
+
+                                <h2 id="TEM4" style="color:white; margin-left:5%">기온 : LOADING</h2>
+                                <h2 id="HUM4" style="color:white; margin-left:5%">습도 : LOADING</h2>
+                                <h2 id="WTR4" style="color:white; margin-left:5%">수분 : LOADING</h2>
+                                <h2 id="BRI4" style="color:white; margin-left:5%">광량 : LOADING</h2>
+                                <h2 id="PPM4" style="color:white; margin-left:5%">유해 물질 : LOADING</h2>
+                            </div>
+
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
+    </div>
         <!-- /#page-content-wrapper -->
 
     </div>
@@ -198,7 +229,7 @@
     <script>
         jQuery(document).ready(function ($){
             $.ajax({
-                url: "http://169.56.126.151/data/getcurrentdata?device=1",
+                url: "http://127.0.0.1:8000/data/getcurrentdata?device=1",
                 dataType: "json",
                 type: "GET",
                 json: "callback",
@@ -207,20 +238,24 @@
                     var hum = document.getElementById('HUM1');
                     var wtr = document.getElementById('WTR1');
                     var bri = document.getElementById('BRI1');
-                    tem.innerHTML = "온도 : " + r.Temperature + "ºC";
-                    hum.innerHTML = "습도 : " + r.Humidity + "%";
-                    wtr.innerHTML = "수분량 : " + r.Wtr;
-                    bri.innerHTML = "광량 : " + r.Lux + "Lx";
+                    var ppm = document.getElementById('PPM1');
+                    tem.innerHTML = "기온 : " + r.Temperature + " ºC";
+                    hum.innerHTML = "습도 : " + r.Humidity + " %";
+                    wtr.innerHTML = "수분 : " + r.Wtr + " (" + Math.round(r.Wtr / 1024 * 100) + " %)";
+                    bri.innerHTML = "광량 : " + r.Lux + " Lux";
+                    ppm.innerHTML = "유해 물질 : " + r.Ppm + " ppm";
                 },
                 error: function(request, status, error){
                     var tem = document.getElementById('TEM1');
                     var hum = document.getElementById('HUM1');
                     var wtr = document.getElementById('WTR1');
                     var bri = document.getElementById('BRI1');
-                    tem.innerHTML = "온도 : ERROR";
+                    var ppm = document.getElementById('PPM1');
+                    tem.innerHTML = "기온 : ERROR";
                     hum.innerHTML = "습도 : ERROR";
-                    wtr.innerHTML = "수분량 : ERROR";
+                    wtr.innerHTML = "수분 : ERROR";
                     bri.innerHTML = "광량 : ERROR";
+                    ppm.innerHTML = "유해 물질 : ERROR";
                 }
             });
          });
