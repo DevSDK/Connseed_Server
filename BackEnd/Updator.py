@@ -14,7 +14,7 @@ import threading
 import requests
 from xml.dom import minidom
 
-baseaddress = "http://127.0.0.1:8000"
+baseaddress = "http://169.56.126.151"
 
 id = 'sdkadmin'
 pw = 'loginadmin'

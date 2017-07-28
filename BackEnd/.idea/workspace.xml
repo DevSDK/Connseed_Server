@@ -34,12 +34,12 @@
       <file leaf-file-name="Updator.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Updator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
+            <state relative-caret-position="228">
               <caret line="48" column="0" lean-forward="true" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
               <folding>
                 <element signature="e#111#124#0" expanded="true" />
-                <marker date="1501211166413" expanded="true" signature="614:634" ph="select * fro... customer" />
-                <marker date="1501211166413" expanded="true" signature="614:649" ph="select * fro... Data_loradevice" />
+                <marker date="1501211390826" expanded="true" signature="614:634" ph="select * fro... customer" />
+                <marker date="1501211390826" expanded="true" signature="614:649" ph="select * fro... Data_loradevice" />
               </folding>
             </state>
           </provider>
@@ -933,12 +933,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Updator.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
+        <state relative-caret-position="228">
           <caret line="48" column="0" lean-forward="true" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
           <folding>
             <element signature="e#111#124#0" expanded="true" />
-            <marker date="1501211166413" expanded="true" signature="614:634" ph="select * fro... customer" />
-            <marker date="1501211166413" expanded="true" signature="614:649" ph="select * fro... Data_loradevice" />
+            <marker date="1501211390826" expanded="true" signature="614:634" ph="select * fro... customer" />
+            <marker date="1501211390826" expanded="true" signature="614:649" ph="select * fro... Data_loradevice" />
           </folding>
         </state>
       </provider>
