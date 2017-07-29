@@ -116,13 +116,13 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 style="color:white; font-size:50px">Monitoring</h1>
-                        <p style="color:white; font-size:20px">This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will appear/disappear. On small screens, the page content will be pushed off canvas.</p>
-                        <p style="color:white">Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p>
+                        <p style="color:white; font-size:25px">Connseed 디바이스의 센서 측정 값을 실시간으로 볼 수 있습니다.</p>
+
                         <div class="devcard">
                             <img src="static/dev_y.png" width=100 height=300 style="margin:50px 70px; float:left" />
 
                             <div style="width:80%; height:85%; float:left; margin-top:30px; border-left:5px solid white">
-                                <h1 style="color:white; margin-left:5%">Device 1 (Nickname : 학교뒷산)</h1>
+                                <h1 id="LORA1" style="color:white; margin-left:5%">Device 1 (학교뒷산)</h1>
 
                                 <h2 id="TEM1" style="color:white; margin-left:5%">기온 : LOADING</h2>
                                 <h2 id="HUM1" style="color:white; margin-left:5%">습도 : LOADING</h2>
@@ -229,7 +229,7 @@
     <script>
         jQuery(document).ready(function ($){
             $.ajax({
-                url: "http://169.56.126.151/data/getcurrentdata?device=1",
+                url: "http://127.0.0.1:8000/data/getcurrentdata?device=2",
                 dataType: "json",
                 type: "GET",
                 json: "callback",
@@ -239,11 +239,12 @@
                     var wtr = document.getElementById('WTR1');
                     var bri = document.getElementById('BRI1');
                     var ppm = document.getElementById('PPM1');
+
                     tem.innerHTML = "기온 : " + r.Temperature + " ºC";
                     hum.innerHTML = "습도 : " + r.Humidity + " %";
                     wtr.innerHTML = "수분 : " + r.Wtr + " (" + Math.round(r.Wtr / 1024 * 100) + " %)";
                     bri.innerHTML = "광량 : " + r.Lux + " Lux";
-                    ppm.innerHTML = "유해 물질 : " + r.Ppm + " ppm";
+                    ppm.innerHTML = "유해 물질 : " + r.Ppm.toFixed(3) + " ppm";
                 },
                 error: function(request, status, error){
                     var tem = document.getElementById('TEM1');
@@ -256,6 +257,132 @@
                     wtr.innerHTML = "수분 : ERROR";
                     bri.innerHTML = "광량 : ERROR";
                     ppm.innerHTML = "유해 물질 : ERROR";
+                }
+            });
+         });
+    </script>
+
+     <script>
+        jQuery(document).ready(function ($){
+            $.ajax({
+                url: "http://127.0.0.1:8000/data/getcurrentdata?device=3",
+                dataType: "json",
+                type: "GET",
+                json: "callback",
+                success: function(r){
+                    var tem = document.getElementById('TEM2');
+                    var hum = document.getElementById('HUM2');
+                    var wtr = document.getElementById('WTR2');
+                    var bri = document.getElementById('BRI2');
+                    var ppm = document.getElementById('PPM2');
+
+                    tem.innerHTML = "기온 : " + r.Temperature + " ºC";
+                    hum.innerHTML = "습도 : " + r.Humidity + " %";
+                    wtr.innerHTML = "수분 : " + r.Wtr + " (" + Math.round(r.Wtr / 1024 * 100) + " %)";
+                    bri.innerHTML = "광량 : " + r.Lux + " Lux";
+                    ppm.innerHTML = "유해 물질 : " + r.Ppm.toFixed(3) + " ppm";
+                },
+                error: function(request, status, error){
+                    var tem = document.getElementById('TEM2');
+                    var hum = document.getElementById('HUM2');
+                    var wtr = document.getElementById('WTR2');
+                    var bri = document.getElementById('BRI2');
+                    var ppm = document.getElementById('PPM2');
+                    tem.innerHTML = "기온 : ERROR";
+                    hum.innerHTML = "습도 : ERROR";
+                    wtr.innerHTML = "수분 : ERROR";
+                    bri.innerHTML = "광량 : ERROR";
+                    ppm.innerHTML = "유해 물질 : ERROR";
+                }
+            });
+         });
+    </script>
+
+     <script>
+        jQuery(document).ready(function ($){
+            $.ajax({
+                url: "http://127.0.0.1:8000/data/getcurrentdata?device=4",
+                dataType: "json",
+                type: "GET",
+                json: "callback",
+                success: function(r){
+                    var tem = document.getElementById('TEM3');
+                    var hum = document.getElementById('HUM3');
+                    var wtr = document.getElementById('WTR3');
+                    var bri = document.getElementById('BRI3');
+                    var ppm = document.getElementById('PPM3');
+
+                    tem.innerHTML = "기온 : " + r.Temperature + " ºC";
+                    hum.innerHTML = "습도 : " + r.Humidity + " %";
+                    wtr.innerHTML = "수분 : " + r.Wtr + " (" + Math.round(r.Wtr / 1024 * 100) + " %)";
+                    bri.innerHTML = "광량 : " + r.Lux + " Lux";
+                    ppm.innerHTML = "유해 물질 : " + r.Ppm.toFixed(3) + " ppm";
+                },
+                error: function(request, status, error){
+                    var tem = document.getElementById('TEM3');
+                    var hum = document.getElementById('HUM3');
+                    var wtr = document.getElementById('WTR3');
+                    var bri = document.getElementById('BRI3');
+                    var ppm = document.getElementById('PPM3');
+                    tem.innerHTML = "기온 : ERROR";
+                    hum.innerHTML = "습도 : ERROR";
+                    wtr.innerHTML = "수분 : ERROR";
+                    bri.innerHTML = "광량 : ERROR";
+                    ppm.innerHTML = "유해 물질 : ERROR";
+                }
+            });
+         });
+    </script>
+     <script>
+        jQuery(document).ready(function ($){
+            $.ajax({
+                url: "http://127.0.0.1:8000/data/getcurrentdata?device=5",
+                dataType: "json",
+                type: "GET",
+                json: "callback",
+                success: function(r){
+                    var tem = document.getElementById('TEM4');
+                    var hum = document.getElementById('HUM4');
+                    var wtr = document.getElementById('WTR4');
+                    var bri = document.getElementById('BRI4');
+                    var ppm = document.getElementById('PPM4');
+
+                    tem.innerHTML = "기온 : " + r.Temperature + " ºC";
+                    hum.innerHTML = "습도 : " + r.Humidity + " %";
+                    wtr.innerHTML = "수분 : " + r.Wtr + " (" + Math.round(r.Wtr / 1024 * 100) + " %)";
+                    bri.innerHTML = "광량 : " + r.Lux + " Lux";
+                    ppm.innerHTML = "유해 물질 : " + r.Ppm.toFixed(3) + " ppm";
+                },
+                error: function(request, status, error){
+                    var tem = document.getElementById('TEM4');
+                    var hum = document.getElementById('HUM4');
+                    var wtr = document.getElementById('WTR4');
+                    var bri = document.getElementById('BRI4');
+                    var ppm = document.getElementById('PPM4');
+                    tem.innerHTML = "기온 : ERROR";
+                    hum.innerHTML = "습도 : ERROR";
+                    wtr.innerHTML = "수분 : ERROR";
+                    bri.innerHTML = "광량 : ERROR";
+                    ppm.innerHTML = "유해 물질 : ERROR";
+                }
+            });
+         });
+    </script>
+     <script>
+        jQuery(document).ready(function ($){
+            $.ajax({
+                url: "http://127.0.0.1:8000/data/devicelist",
+                dataType: "json",
+                type: "GET",
+                json: "callback",
+                success: function(r){
+                    var lora = document.getElementById('LORA1');
+                    lora.innerHTML = "Device " + r[0].id + " (" + r[0].Nickname + ", " +  r[0].Battery + "%)"
+                },
+                error: function(request, status, error){
+                    var lora = document.getElementById('LORA1');
+                    lora.innerHTML = "Device를 찾을 수 없습니다."
+                    alert("네트워크가 좋지 않습니다.\n네트워크 연결을 확인해주세요.");
                 }
             });
          });

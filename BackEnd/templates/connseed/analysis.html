@@ -195,17 +195,27 @@
                             <input id="select5" name="con" type="radio">
                             <label for="select5" class="ppm">PPM</label><br />
 
-                            <div id="graph1" class="page1" onclick="chartresize"></div>
-                            <div id="graph2" class="page2" onclick="chartresize"></div>
-                            <div id="graph3" class="page3" onclick="chartresize"></div>
-                            <div id="graph4" class="page4" onclick="chartresize"></div>
-                            <div id="graph5" class="page5" onclick="chartresize"></div>
+                            <div id="graph1" class="page1">
+
+                            </div>
+                            <div id="graph2" class="page2">
+
+                            </div>
+                            <div id="graph3" class="page3">
+
+                            </div>
+                            <div id="graph4" class="page4">
+
+                            </div>
+                            <div id="graph5" class="page5">
+
+                            </div>
                          </div>
                         <a href="#" class="float">
                             <i class="fl"></i>
                         </a>
 
-                        <p style="font-size:30px; color:white">Hot_Pepper 의 해당 시기 적정 기온보다 다소 높습니다. <br /> 가림막 투과도를 낮춰주세요.</pstyle="font-size:30px;>
+
 
                     </div>
                 </div>
@@ -253,7 +263,7 @@
 
         jQuery(document).ready(function ($) {
             $.ajax({
-                url: "http://169.56.126.151/data/getstatisticaldata_day?device=1&date=2017-07-09",
+                url: "http://169.56.126.151/data/getstatisticaldata_day?device=1&date=2017-07-28",
                 dataType: "json",
                 type: "GET",
                 json: "callback",
@@ -325,7 +335,7 @@
         ]);
 
          var option1 = {
-            width: $(window).width()-70,
+            width: $(window).width()-400,
             height: 450,
             colors: ['#dc3912'],
              annotations: {
@@ -364,7 +374,7 @@
          };
 
          var option2 = {
-            width: $(window).width()-70,
+            width: $(window).width()-400,
             height: 450,
             colors: ['#3366cc'],
              annotations: {
@@ -403,7 +413,7 @@
          };
 
          var option3 = {
-            width: $(window).width()-70,
+            width: $(window).width()-400,
             height: 450,
             colors: ['#109618'],
              annotations: {
@@ -442,7 +452,7 @@
          };
 
          var option4 = {
-            width: $(window).width()-70,
+            width: $(window).width()-400,
             height: 450,
             colors: ['#ff9900'],
              annotations: {
@@ -481,7 +491,7 @@
          };
 
         var option5 = {
-            width: $(window).width()-80,
+            width: $(window).width()-400,
             height: 450,
             colors: ['#707070'],
              annotations: {
@@ -524,11 +534,21 @@
          var chart3 = new google.visualization.ComboChart(document.getElementById('graph3'));
          var chart4 = new google.visualization.ComboChart(document.getElementById('graph4'));
          var chart5 = new google.visualization.ComboChart(document.getElementById('graph5'));
+         var tag1 = '<p style= "font-size:25px; color:white">Hot_Pepper 의 기온이 해당 시기 적정 기온보다 다소 높습니다. <br /> 가림막 투과도를 낮춰주세요.</pstyle=font-size:25px;>';
+         var tag2 = '<p style= "font-size:25px; color:white">Hot_Pepper 의 습도는 적절합니다.</pstyle=font-size:25px;>';
+         var tag3 = '<p style= "font-size:25px; color:white">Hot_Pepper 의 수분량은 해당 시기 적정 수분량보다 다소 높습니다. <br /> 물을 좀 더 주세요.</pstyle=font-size:25px;>';
+         var tag4 = '<p style= "font-size:25px; color:white">Hot_Pepper 의 광량은 적절합니다.</pstyle=font-size:25px;>';
+         var tag5 = '<p style= "font-size:25px; color:white">Hot_Pepper 의 유해물질 농도는 좋습니다.</pstyle=font-size:25px;>';
          chart1.draw(data1, option1);
          chart2.draw(data2, option2);
          chart3.draw(data3, option3);
          chart4.draw(data4, option4);
          chart5.draw(data5, option5);
+         $("#graph1").append(tag1);
+         $("#graph2").append(tag2);
+         $("#graph3").append(tag3);
+         $("#graph4").append(tag4);
+         $("#graph5").append(tag5);
     }
 
     $(window).resize(function(){
