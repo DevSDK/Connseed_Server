@@ -376,8 +376,10 @@
                 type: "GET",
                 json: "callback",
                 success: function(r){
-                    var lora = document.getElementById('LORA1');
-                    lora.innerHTML = "Device " + r[0].id + " (" + r[0].Nickname + ", " +  r[0].Battery + "%)"
+                    for(i = 1; i < 5; i++){
+                        var lora = document.getElementById('LORA' + i);
+                        lora.innerHTML = "Device " + r[i-1].id-1 + " (" + r[i-1].Nickname + ", " +  r[i-1].Battery + "%)"
+                    }
                 },
                 error: function(request, status, error){
                     var lora = document.getElementById('LORA1');
