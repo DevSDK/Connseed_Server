@@ -208,11 +208,11 @@
                         var eui = document.getElementById('EUI' + i);
                         var battery = document.getElementById('Battery' + i);
                         var lora = document.getElementById('LORA' + i);
-                        lora.innerHTML = "Device " + (r[i].id-1);
-                        id.innerHTML = "Number : " + (r[i].id-1);
-                        eui.innerHTML = "EUI : " + r[i].EUI;
-                        nickname.innerHTML = "Nickname : " + r[i].Nickname;
-                        battery.innerHTML = "Battery : " + r[i].Battery
+                        lora.innerHTML = "Device " + (r[i-1].id-1);
+                        id.innerHTML = "Number : " + (r[i-1].id-1);
+                        eui.innerHTML = "EUI : " + r[i-1].EUI;
+                        nickname.innerHTML = "Nickname : " + r[i-1].Nickname;
+                        battery.innerHTML = "Battery : " + r[i-1].Battery
                     }
                 },
                 error: function(request, status, error){
